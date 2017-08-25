@@ -63,7 +63,7 @@ static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
 // cycle limitations).
-const unsigned TX_INTERVAL = 15;
+const unsigned TX_INTERVAL = 5;
 
 // Pin mapping
 const lmic_pinmap lmic_pins = {
@@ -115,7 +115,9 @@ void onEvent (ev_t ev) {
             }
             // Schedule next transmission
             os_setTimedCallback(&sendjob, os_getTime()+sec2osticks(TX_INTERVAL), do_send);
-            Watchdog.sleep(25000);
+            Watchdog.sleep(8000);
+            Watchdog.sleep(8000);
+            Watchdog.sleep(4000);
             break;
         case EV_LOST_TSYNC:
             Serial.println(F("EV_LOST_TSYNC"));
